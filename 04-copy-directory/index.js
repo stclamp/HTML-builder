@@ -10,6 +10,8 @@ async function makeDirectory() {
 
   makeDirectory();
 
+  
+
 
   async function copyFiles() {
     let pathText = join(`${__dirname}/files`);

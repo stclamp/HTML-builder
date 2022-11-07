@@ -3,9 +3,6 @@ const path = require('node:path');
 
 let pathText = path.join(`${__dirname}/secret-folder`);
 
-const filesArr = [];
-const extArr = [];
-
 const showFiles = async () => {
     const files = await fs.readdir(pathText, {withFileTypes: true});
 
