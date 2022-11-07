@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('node:path');
-const { stdin} = require('process');
+const {stdin} = require('process');
 
 const pathText = path.join(__dirname);
 
 const createFile = () => {
-    fs.open(`${pathText}/text.txt`, 'w', (err) => {
+    fs.open(`${pathText}/text.txt`, 'w', err => {
         if(err) throw err;
     });
 }
@@ -16,7 +16,7 @@ const writeToFile = (text) => {
     });
 }
 
-const stdinShow = () => {
+const runStdin= () => {
     stdin.on('data', data => {
         if(data.toString().trim() === 'exit') process.exit();
         writeToFile(data);
@@ -27,8 +27,8 @@ const stdinShow = () => {
 fs.access(`${pathText}/text.txt`, error => {
     if (error) {
         createFile();
-        stdinShow();
+        runStdin();
     } else {
-        stdinShow();
+        runStdin();
     }
 });
