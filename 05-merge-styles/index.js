@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('node:path');
 const {readdir} = require('fs/promises');
-const fsPromise = require('fs/promises');
 
 const projectPath = path.join(`${__dirname}/project-dist`);
 const stylesPath = path.join(`${__dirname}/styles`);
@@ -30,7 +29,6 @@ const showFiles = async () => {
         const stream = fs.ReadStream(`${stylesPath}/${key.name}`, 'utf8');;
         if(!key.isDirectory()){
             if(key.name.split('.')[1] === 'css') {
-                
                 stream.on('readable', function(){
                     let text = stream.read();
                     text ? writeToFile(text, `${projectPath}/bundle.css`) : null
