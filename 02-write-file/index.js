@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('node:path');
-const {stdin} = require('process');
+const {stdin, stdout} = require('process');
 
 const pathText = path.join(__dirname);
 
@@ -18,9 +18,19 @@ const writeToFile = (text) => {
 
 const runStdin= () => {
     stdin.on('data', data => {
-        if(data.toString().trim() === 'exit') process.exit();
+        if(data.toString().trim() === 'exit') {
+            stdout._write("Bye")
+            process.exit()
+        };
+
+        
         writeToFile(data);
     })
+
+    process.on('SIGINT', function() {
+        console.log("\nBye");
+        process.exit();
+    });
 }
 
 
