@@ -17,6 +17,7 @@ const writeToFile = (text) => {
 }
 
 const runStdin= () => {
+    stdout.write("Enter text here: \n")
     stdin.on('data', data => {
         if(data.toString().trim() === 'exit') {
             stdout._write("Bye")

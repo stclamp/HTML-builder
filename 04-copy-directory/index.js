@@ -1,3 +1,4 @@
+const { unlink } = require('node:fs');
 const { mkdir, readdir, copyFile } = require('node:fs/promises');
 const { join } = require('node:path');
 
@@ -14,6 +15,13 @@ async function makeDirectory() {
     let pathText = join(`${__dirname}/files`);
     let copyPath = join(`${__dirname}/files-copy`);
     const files = await readdir(pathText);
+    const copiedFiles = await readdir(copyPath);
+
+    for (key of copiedFiles) {
+      const unlinkFiles = unlink(`${copyPath}/${key}`, err => {
+        if(err) throw err;
+      })
+    }
 
 
     for(key of files) {
